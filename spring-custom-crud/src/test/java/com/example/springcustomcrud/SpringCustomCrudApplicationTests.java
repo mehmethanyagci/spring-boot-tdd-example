@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Arrays;
+import java.io.InputStream;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,16 +32,27 @@ class SpringCustomCrudApplicationTests {
     void contextLoads() {
     }
 
+    /**
+     * This test shows you how to open a .json file located under src/main/resources.
+     *
+     * This is a good starter test to begin with.  The customer gives you .json representing
+     * the desired output.  You can then use that file in your test to create your data
+     * structures and to configure your endpoint.  For the first test, your controller should
+     * return hard-coded values.
+     *
+     */
     @Test
     public void getPersons_returnsEmptyList() throws Exception {
         MockHttpServletResponse response = mockMvc.perform(get("/persons"))
                 .andExpect(status().isOk())
                 .andReturn().getResponse();
 
-        List<Person> expected = Arrays.asList(
-                new Person(1, "John", "Doe", "john.doe@example.com", 21),
-                new Person(2, "Mary", "Smith", "mary.smith@gmail.com", 35)
-        );
+        InputStream sampleJson = getClass().getClassLoader().getResourceAsStream("examples/getPersons_sample.json");
+        List<Person> expected = mapper.readValue(
+                sampleJson,
+                new TypeReference<List<Person>>() {
+                });
+
         List<Person> list = mapper.readValue(
                 response.getContentAsString(),
                 new TypeReference<List<Person>>() {
