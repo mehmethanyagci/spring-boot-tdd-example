@@ -1,5 +1,6 @@
 package com.example.springcustomcrud.service;
 
+import com.example.springcustomcrud.exception.PersonNotFoundException;
 import com.example.springcustomcrud.model.Person;
 import com.example.springcustomcrud.repository.PersonRepository;
 import org.springframework.stereotype.Service;
@@ -18,5 +19,9 @@ public class PersonCrudLogic {
 
     public List<Person> getAll() {
         return personRepository.findAll();
+    }
+
+    public void getPersonById(long l) {
+        throw new PersonNotFoundException();
     }
 }

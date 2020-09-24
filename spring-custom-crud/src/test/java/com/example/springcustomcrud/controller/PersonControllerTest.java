@@ -39,7 +39,7 @@ class PersonControllerTest {
         Mockito.when(personService.getAll()).thenReturn(expected);
 
         //act
-        List<Person> actual = personController.getAllPersons();
+        List<Person> actual = personController.getAllPersons().getBody();
 
         //assert
         Mockito.verify(personService).getAll();

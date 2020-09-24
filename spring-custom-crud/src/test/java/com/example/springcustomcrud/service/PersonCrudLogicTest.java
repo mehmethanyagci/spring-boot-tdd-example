@@ -1,7 +1,9 @@
 package com.example.springcustomcrud.service;
 
+import com.example.springcustomcrud.exception.PersonNotFoundException;
 import com.example.springcustomcrud.model.Person;
 import com.example.springcustomcrud.repository.PersonRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -39,4 +41,11 @@ class PersonCrudLogicTest {
         Mockito.verify(personRepository).findAll();
     }
 
+
+    //throw exception when person doesn't exist
+    //return person if exist
+    @Test
+    public void getPersonByIdThrowsPersonNotFoundExceptionWhenPersonNotFound(){
+        Assertions.assertThrows(PersonNotFoundException.class,()->{personCrudLogic.getPersonById(1l);});
+    }
 }
