@@ -10,6 +10,7 @@ import javax.persistence.Id;
 @Entity
 @Data
 @AllArgsConstructor
+// You need this for your JSON Mapping on your endpoint
 @NoArgsConstructor
 public class Person {
     @Id
