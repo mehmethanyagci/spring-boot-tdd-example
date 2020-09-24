@@ -1,11 +1,22 @@
 package com.example.springcustomcrud.service;
 
+import com.example.springcustomcrud.model.Person;
+import com.example.springcustomcrud.repository.PersonRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class PersonCrudLogic {
 
-    public void getAll() {
+    private final PersonRepository personRepository;
 
+    public PersonCrudLogic(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
+
+    public List<Person> getAll() {
+        return personRepository.findAll();
     }
 }
