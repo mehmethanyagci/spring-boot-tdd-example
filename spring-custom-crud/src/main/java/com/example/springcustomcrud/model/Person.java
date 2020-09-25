@@ -14,9 +14,9 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class Person {
     @Id
-    private long id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String email;
-    private int age;
+    private Integer age;
 }
